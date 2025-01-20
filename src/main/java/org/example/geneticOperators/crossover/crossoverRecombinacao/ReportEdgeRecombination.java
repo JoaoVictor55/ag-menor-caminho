@@ -1,9 +1,10 @@
 package org.example.geneticOperators.crossover.crossoverRecombinacao;
 
+import java.io.Serializable;
 import java.util.*;
 import java.awt.Point;
 
-public class ReportEdgeRecombination {
+public class ReportEdgeRecombination implements Serializable {
 
     private final ArrayList<String> reasons = new ArrayList<>();
     private final ArrayList<Point> chosen = new ArrayList<>();
