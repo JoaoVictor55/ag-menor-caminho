@@ -8,7 +8,7 @@ import org.example.movimentation.Movimentation;
 import org.example.movimentation.DefaultMovimentation;
 import org.example.geneticOperators.crossover.crossoverRecombinacao.CrossoverEdgeRecombination;
 import org.example.geneticOperators.crossover.crossoverRecombinacao.EdgeRecombination;
-import org.example.geneticOperators.crossover.crossoverRecombinacao.ReportEdgeRecombination;
+import org.example.geneticOperators.crossover.crossoverRecombinacao.ReportEdgeRecombinationComposer;
 import org.example.uteis.GerarAleatorios;
 
 import java.awt.*;
@@ -71,9 +71,15 @@ public class TesteCrossoverComRelatorio {
         var custoFilho = i.get(0).getCost();
         var tamanhoFilho = i.get(0).getSize();
 
-        ReportEdgeRecombination reportEdgeRecombination = crossover.getReport();
+        var reportEdgeRecombinationComposer = crossover.getReport();
 
-        System.out.print(reportEdgeRecombination.getSize());
+
+        for(int a = 0; a < reportEdgeRecombinationComposer.reasons().size(); ++a){
+
+            System.out.println(reportEdgeRecombinationComposer.reasons().get(a));
+            System.out.println(reportEdgeRecombinationComposer.adjacent().get(a));
+            System.out.println(reportEdgeRecombinationComposer.adjacentTo().get(a));
+        }
 
 
     }

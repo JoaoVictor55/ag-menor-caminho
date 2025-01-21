@@ -20,7 +20,7 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
 
     private final Random random = new SecureRandom();
 
-    private final ReportEdgeRecombination reportEdgeRecombination = new ReportEdgeRecombination();
+    private ReportEdgeRecombinationComposer reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
 
     private Boolean activeReport = false;
 
@@ -219,9 +219,13 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
                              Set<Point> deleted){
         if(activeReport){
 
+            if(reportEdgeRecombinationComposer == null){
+                reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
+            }
+
             List<Point> points = adjacency.stream().filter(p-> !deleted.contains(p) || (p.equals(chosen))).toList();
 
-            reportEdgeRecombination.addReport(reason.toString(), chosen, adjacentTo,
+            reportEdgeRecombinationComposer.addReport(reason.toString(), chosen, adjacentTo,
                     points);
         }
     }
@@ -232,10 +236,13 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
         return this.activeReport;
     }
 
+
     @Override
     public ReportEdgeRecombination getReport() {
 
-        return reportEdgeRecombination;
+        var bff = reportEdgeRecombinationComposer.getRecord();
+        this.reportEdgeRecombinationComposer = null;
+        return bff;
     }
 
     @Override
