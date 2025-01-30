@@ -9,6 +9,7 @@ import org.example.geneticOperators.crossover.Crossover;
 import org.example.geneticOperators.selection.Selection;
 import org.example.geneticOperators.mutation.Mutation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,6 +21,11 @@ public class GeneticAlgorithm implements StochasticOperator {
     private Crossover crossover;
     private Long seed;
 
+    @Setter
+    @Getter
+    private boolean makeOffspringReport;
+
+    private List<OffspringGenerationReport> offspringGenerationReports;
 
     public GeneticAlgorithm(Selection selection, Mutation mutation, Crossover crossover, Long seed){
         this.selection = selection;
@@ -49,11 +55,14 @@ public class GeneticAlgorithm implements StochasticOperator {
 
         while(newPopulation.getSize() < sizeGeneratedPopulation){
 
+            Individual father = parents.getRandomIndividual();
+            Individual mother = parents.getRandomIndividual();
+           List<Individual> offspring = crossover.crossover(father, mother);
 
-           List<Individual> offspring = crossover.crossover(parents.getRandomIndividual(), parents.getRandomIndividual());
-
+            makeOffspringGenerationReport(father, mother, offspring);
 
             for(Individual i : offspring){
+
                 mutation.mutate(i);
             }
 
@@ -65,6 +74,31 @@ public class GeneticAlgorithm implements StochasticOperator {
     }
 
 
+    private void makeOffspringGenerationReport(Individual father, Individual mother, List<Individual> offsprings) {
+
+        if(makeOffspringReport){
+
+            Individual fatherCopy = new Individual(father.getMovimentation(), father.getCostCalculator(), father.getPath());
+            Individual motherCopy = new Individual(mother.getMovimentation(), mother.getCostCalculator(), mother.getPath());
+            List<Individual> offspringsCopy = new ArrayList<>();
+            for(Individual offspring : offsprings){
+                offspringsCopy.add(new Individual(offspring.getMovimentation(), offspring.getCostCalculator(),
+                        offspring.getPath()));
+            }
+
+            offspringGenerationReports.add(new OffspringGenerationReport(fatherCopy, motherCopy, offspringsCopy));
+
+        }
+    }
+
+    public List<OffspringGenerationReport> getOffspringGenerationReport(){
+
+        if(!isMakeOffspringReport()) return null;
+
+        List<OffspringGenerationReport> offspringGenerationReportsCopy = this.offspringGenerationReports;
+        this.offspringGenerationReports = new ArrayList<>();
+        return offspringGenerationReportsCopy;
+    }
 
     @Override
     public Long getSeed() {

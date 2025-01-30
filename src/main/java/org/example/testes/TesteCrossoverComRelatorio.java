@@ -65,7 +65,7 @@ public class TesteCrossoverComRelatorio {
         //var mae = populacao.get(1);
         //var pai = populacao.get(0);
 
-        crossover.setActiveReport();
+        crossover.setActiveReport(true);
         List<Individual> i = crossover.crossover(pai, mae);
 
         var custoFilho = i.get(0).getCost();
@@ -80,6 +80,8 @@ public class TesteCrossoverComRelatorio {
             System.out.println(reportEdgeRecombinationComposer.adjacent().get(a));
             System.out.println(reportEdgeRecombinationComposer.adjacentTo().get(a));
         }
+
+        crossover.setActiveReport(false);
 
 
     }

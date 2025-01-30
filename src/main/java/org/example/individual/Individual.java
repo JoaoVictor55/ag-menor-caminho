@@ -18,7 +18,6 @@ public class Individual implements Comparable<Individual> {
     @Getter
     private final CostCalculator costCalculator;
 
-    @Getter
     private final List<Point> path;
 
     private Double cost;
@@ -49,6 +48,18 @@ public class Individual implements Comparable<Individual> {
         else{
             this.path.add(this.path.size() + where, position);
         }
+    }
+
+    public List<Point> getPath(){
+
+        List<Point> copyOfPath = new ArrayList<>();
+
+        for(Point p : this.path){
+
+            copyOfPath.add(new Point(p.x, p.y));
+        }
+
+        return copyOfPath;
     }
 
     public void pushPosition(Point posicao){

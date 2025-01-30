@@ -9,6 +9,10 @@ public class Main {
 
         HashMap<Integer, List<Integer>> hashMap = new HashMap<>();
 
+        List<Integer> a = new ArrayList<>();
+
+        Object p = a;
+
         hashMap.put(1, new ArrayList<>());
         hashMap.get(1).add(2);
         hashMap.get(1).add(3);

@@ -219,10 +219,6 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
                              Set<Point> deleted){
         if(activeReport){
 
-            if(reportEdgeRecombinationComposer == null){
-                reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
-            }
-
             List<Point> points = adjacency.stream().filter(p-> !deleted.contains(p) || (p.equals(chosen))).toList();
 
             reportEdgeRecombinationComposer.addReport(reason.toString(), chosen, adjacentTo,
@@ -241,12 +237,12 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
     public ReportEdgeRecombination getReport() {
 
         var bff = reportEdgeRecombinationComposer.getRecord();
-        this.reportEdgeRecombinationComposer = null;
+        this.reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
         return bff;
     }
 
     @Override
-    public void setActiveReport() {
-        this.activeReport = true;
+    public void setActiveReport(boolean activeReport) {
+        this.activeReport = activeReport;
     }
 }

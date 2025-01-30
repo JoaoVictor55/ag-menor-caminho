@@ -6,7 +6,7 @@ public interface EdgeRecombination extends Crossover {
 
 
      ReportEdgeRecombination getReport();
-     void setActiveReport();
+     void setActiveReport(boolean activeReport);
      boolean getActiveReport();
 
     enum TypeChange {
