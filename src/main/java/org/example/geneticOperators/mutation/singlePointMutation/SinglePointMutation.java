@@ -2,6 +2,7 @@ package org.example.geneticOperators.mutation.singlePointMutation;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.geneticOperators.mutation.MutationWithReport;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
 
 public class SinglePointMutation implements MutationWithReport {
 
@@ -163,14 +165,16 @@ public class SinglePointMutation implements MutationWithReport {
     }
 
     @Override
-    public void activateReport(boolean activate) {
+    public void setActiveReport(boolean activate) {
 
         this.useReports = activate;
     }
 
     @Override
-    public ReportMutation getResult() {
+    public ReportMutation getReport() {
 
         return reportMutation;
     }
+
+
 }

@@ -3,6 +3,7 @@ package org.example.geneticOperators.crossover.crossoverRecombinacao;
 import lombok.Getter;
 import org.example.geneticOperators.OperatorWithReport;
 import org.example.geneticOperators.crossover.Crossover;
+import org.example.geneticOperators.crossover.CrossoverWithReport;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 
@@ -13,7 +14,7 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.List;
 
-public class CrossoverEdgeRecombination implements OperatorWithReport<ReportEdgeRecombination>, Crossover {
+public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdgeRecombination> {
 
     @Getter
     private Long seed;

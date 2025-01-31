@@ -1,7 +1,5 @@
 package org.example.testes;
 
-import org.example.geneticOperators.OperatorWithReport;
-import org.example.geneticOperators.crossover.Crossover;
 import org.example.scenario.Scenario;
 import org.example.cost.CostCalculator;
 import org.example.cost.DefaultCostCalculator;
@@ -9,8 +7,6 @@ import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 import org.example.movimentation.DefaultMovimentation;
 import org.example.geneticOperators.crossover.crossoverRecombinacao.CrossoverEdgeRecombination;
-import org.example.geneticOperators.crossover.crossoverRecombinacao.EdgeRecombination;
-import org.example.geneticOperators.crossover.crossoverRecombinacao.ReportEdgeRecombinationComposer;
 import org.example.uteis.GerarAleatorios;
 
 import java.awt.*;
