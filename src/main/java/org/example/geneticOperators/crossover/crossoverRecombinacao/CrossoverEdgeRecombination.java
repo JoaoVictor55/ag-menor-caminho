@@ -1,6 +1,8 @@
 package org.example.geneticOperators.crossover.crossoverRecombinacao;
 
 import lombok.Getter;
+import org.example.geneticOperators.OperatorWithReport;
+import org.example.geneticOperators.crossover.Crossover;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 
@@ -11,7 +13,7 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.List;
 
-public class CrossoverEdgeRecombination implements EdgeRecombination {
+public class CrossoverEdgeRecombination implements OperatorWithReport<ReportEdgeRecombination>, Crossover {
 
     @Getter
     private Long seed;
@@ -23,6 +25,7 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
     private ReportEdgeRecombinationComposer reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
 
     private Boolean activeReport = false;
+
 
     public CrossoverEdgeRecombination(Long seed, Movimentation movimentation){
 
@@ -138,7 +141,8 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
 
                 Point p = mother.getPosition(-1);
                 offSprings.pushPosition(p);
-                this.writeReport(TypeChange.FINAL, p, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                this.writeReport(ReportEdgeRecombinationComposer.TypeChange.FINAL, p,
+                        added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 break;
             }
 
@@ -157,9 +161,11 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
                 if(higherPriority.contains(adjacency)){
 
                     offSprings.pushPosition(adjacency);
-                    this.writeReport(TypeChange.NEXT_FINAL, adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.NEXT_FINAL,
+                            adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     offSprings.pushPosition(mother.getPosition(-1));
-                    this.writeReport(TypeChange.FINAL, mother.getPosition(-1), added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.FINAL,
+                            mother.getPosition(-1), added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     keepGoing = false;
                     break;
                 }
@@ -172,10 +178,12 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
                     offSprings.pushPosition(adjacency);
 
                     if(deletadosQuantidade == adjacencyMatrix.get(added).size()-1){
-                        this.writeReport(TypeChange.ONLY_OPTION, adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                        this.writeReport(ReportEdgeRecombinationComposer.TypeChange.ONLY_OPTION,
+                                adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     }
                     else
-                        this.writeReport(TypeChange.COMUM, adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                        this.writeReport(ReportEdgeRecombinationComposer.TypeChange.COMUM,
+                                adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
 
                     added = adjacency;
                     edgesAlreadyUsed.add(added);
@@ -197,10 +205,10 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
                 offSprings.pushPosition(possibleEdge);
 
                 if(deletadosQuantidade == adjacencyMatrix.get(added).size()-1){
-                    this.writeReport(TypeChange.ONLY_OPTION, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.ONLY_OPTION, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 }
                 else
-                    this.writeReport(TypeChange.RANDOM, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.RANDOM, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 edgesAlreadyUsed.add(possibleEdge);
                 added = offSprings.getPosition(-1);
 
@@ -214,7 +222,7 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
         return List.of(offSprings);
     }
 
-    private void writeReport(TypeChange reason, Point chosen,
+    private void writeReport(ReportEdgeRecombinationComposer.TypeChange reason, Point chosen,
                              Point adjacentTo, List<Point> adjacency,
                              Set<Point> deleted){
         if(activeReport){
@@ -227,7 +235,7 @@ public class CrossoverEdgeRecombination implements EdgeRecombination {
     }
 
     @Override
-    public boolean getActiveReport(){
+    public boolean isReportActive(){
 
         return this.activeReport;
     }

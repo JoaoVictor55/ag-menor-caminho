@@ -54,4 +54,24 @@ public class ReportEdgeRecombinationComposer implements Serializable {
         return report;
     }
 
+    public enum TypeChange {
+        RANDOM("Aleatório"),
+        ONLY_OPTION("Única opção"),
+        NEXT_FINAL("Adjacente ao final"),
+        FINAL("Final"),
+        COMUM("Nó comum"),
+        REMOVED("Nó foi removido");
+
+        private  final String name;
+
+        TypeChange(String name){
+            this.name = name;
+        }
+
+        @Override
+        public String toString(){
+            return this.name;
+        }
+    }
+
 }

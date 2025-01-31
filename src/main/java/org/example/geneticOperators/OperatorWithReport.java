@@ -2,7 +2,7 @@ package org.example.geneticOperators;
 
 public interface OperatorWithReport <R>{
 
-    void setActivateReport(boolean activate);
+    void setActiveReport(boolean activate);
     boolean isReportActive();
     R getReport();
 }

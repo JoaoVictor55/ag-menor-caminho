@@ -7,7 +7,7 @@ public interface EdgeRecombination extends Crossover {
 
      ReportEdgeRecombination getReport();
      void setActiveReport(boolean activeReport);
-     boolean getActiveReport();
+     boolean isReportActive();
 
     enum TypeChange {
         RANDOM("Aleatório"),

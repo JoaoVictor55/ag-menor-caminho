@@ -1,5 +1,7 @@
 package org.example.testes;
 
+import org.example.geneticOperators.OperatorWithReport;
+import org.example.geneticOperators.crossover.Crossover;
 import org.example.scenario.Scenario;
 import org.example.cost.CostCalculator;
 import org.example.cost.DefaultCostCalculator;
@@ -33,7 +35,7 @@ public class TesteCrossoverComRelatorio {
 
         //Populacao populacao1 = new Populacao(populacao, semente);
 
-        EdgeRecombination crossover = new CrossoverEdgeRecombination(semente, movimentation);
+        CrossoverEdgeRecombination crossover = new CrossoverEdgeRecombination(semente, movimentation);
 
         Individual pai = new Individual(movimentation, costCalculator);
         pai.pushPosition(inicio);
