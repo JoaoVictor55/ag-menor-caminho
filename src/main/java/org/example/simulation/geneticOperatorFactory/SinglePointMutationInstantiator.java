@@ -1,8 +1,8 @@
-package org.example.testes.testesComFactory;
+package org.example.simulation.geneticOperatorFactory;
 
 import org.example.geneticOperators.mutation.singlePointMutation.SinglePointMutation;
 import org.example.movimentation.Movimentation;
-import org.example.simulation.factory.ObjectInstancer;
+import org.example.simulation.ObjectInstancer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +18,6 @@ public class SinglePointMutationInstantiator implements ObjectInstancer<SinglePo
         MUTATION_PROBABILITY,
         MOVIMENTATION,
         ACTIVE_REPORT,
-
-
-
     }
 
     @Override

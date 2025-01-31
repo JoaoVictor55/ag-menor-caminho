@@ -1,6 +1,6 @@
 package org.example.testes.testesComFactory;
 
-import org.example.simulation.factory.TournamentWithReplacementInstantiator;
+import org.example.simulation.geneticOperatorFactory.TournamentWithReplacementInstantiator;
 
 import java.util.HashMap;
 import java.util.Map;
