@@ -5,6 +5,7 @@ import org.example.movimentation.Movimentation;
 import org.example.scenario.Scenario;
 import org.example.simulation.ObjectInstantiator;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class DefaultCostCalculatorFactory implements ObjectInstantiator<DefaultCostCalculator> {
@@ -38,7 +39,7 @@ public class DefaultCostCalculatorFactory implements ObjectInstantiator<DefaultC
 
         return this.defaultCostCalculator;
     }
-    
+
     @Override
     public DefaultCostCalculator getInstance() {
         return this.defaultCostCalculator;
@@ -47,6 +48,11 @@ public class DefaultCostCalculatorFactory implements ObjectInstantiator<DefaultC
 
     @Override
     public Map<String, Object> getParametersListOfConstructor() {
-        return Map.of();
+
+        Map<String, Object> parameterListOfConstructor = new HashMap<>();
+        parameterListOfConstructor.put(listOfParameters.MOVIMENTATION.toString(), Movimentation.class);
+        parameterListOfConstructor.put(listOfParameters.SCENARIO.toString(), Scenario.class);
+
+        return parameterListOfConstructor;
     }
 }

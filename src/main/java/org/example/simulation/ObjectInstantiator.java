@@ -8,4 +8,5 @@ public interface ObjectInstantiator<O>{
     O getInstance();
     Map<String, Object> getParametersListOfConstructor();
 
+
 }

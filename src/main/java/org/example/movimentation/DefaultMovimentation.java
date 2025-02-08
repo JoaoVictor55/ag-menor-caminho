@@ -1,6 +1,7 @@
 package org.example.movimentation;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.ToString;
 import org.example.scenario.Scenario;
 
@@ -8,20 +9,20 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @ToString
 public class DefaultMovimentation implements Movimentation {
 
     @ToString.Exclude
     private static final Double twoSqrt = Math.sqrt(2);
 
-    @Getter
     private final Scenario scenario;
 
-    @Getter
     private final Point startPoint;
-    @Getter
     private final Point endPoint;
-    public DefaultMovimentation(Scenario scenario, Point startPoint, Point endPoint){
+    public DefaultMovimentation(@NonNull Scenario scenario,
+                                @NonNull Point startPoint,
+                                @NonNull Point endPoint){
 
         this.scenario = scenario;
         this.startPoint = startPoint;
