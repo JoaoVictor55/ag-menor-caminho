@@ -8,7 +8,7 @@ import org.example.individual.Population;
 import java.security.SecureRandom;
 import java.util.*;
 
-public class TournamentWithReplacement implements Selection {
+public class TournamentWithReplacement extends SelectionBase {
 
     private final Random random = new SecureRandom();
 

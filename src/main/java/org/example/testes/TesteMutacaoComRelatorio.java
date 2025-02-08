@@ -28,7 +28,7 @@ public class TesteMutacaoComRelatorio {
 
         SinglePointMutation mutacao = new SinglePointMutation(semente, movimentation, 1.0f);
 
-        mutacao.activateReport(true);
+        mutacao.setActiveReport(true);
         Individual i = new Individual(movimentation, costCalculator);
         i.pushPosition(inicio); //0
         i.pushPosition(new Point(1,1)); //1
@@ -55,7 +55,7 @@ public class TesteMutacaoComRelatorio {
         mutacao.mutate(i);
         System.out.println(i.getCost());
 
-        ReportMutation reportMutation = mutacao.getResult();
+        ReportMutation reportMutation = mutacao.getReport();
 
         System.out.println(reportMutation);
 

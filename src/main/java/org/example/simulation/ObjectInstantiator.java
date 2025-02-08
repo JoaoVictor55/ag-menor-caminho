@@ -2,7 +2,7 @@ package org.example.simulation;
 
 import java.util.Map;
 
-public interface ObjectInstancer<O>{
+public interface ObjectInstantiator<O>{
 
     O build(Map<String, Object> parameters) throws InstantiationException;
     O configure(Map<String, Object> parameters);

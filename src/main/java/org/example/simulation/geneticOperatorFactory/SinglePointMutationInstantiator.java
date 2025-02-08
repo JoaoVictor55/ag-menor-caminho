@@ -2,12 +2,12 @@ package org.example.simulation.geneticOperatorFactory;
 
 import org.example.geneticOperators.mutation.singlePointMutation.SinglePointMutation;
 import org.example.movimentation.Movimentation;
-import org.example.simulation.ObjectInstancer;
+import org.example.simulation.ObjectInstantiator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SinglePointMutationInstantiator implements ObjectInstancer<SinglePointMutation> {
+public class SinglePointMutationInstantiator implements ObjectInstantiator<SinglePointMutation> {
 
     private SinglePointMutation singlePointMutation;
 
@@ -53,7 +53,7 @@ public class SinglePointMutationInstantiator implements ObjectInstancer<SinglePo
                 null);
 
         if(activeMutationReport != null){
-            this.singlePointMutation.activateReport(activeMutationReport);
+            this.singlePointMutation.setActiveReport(activeMutationReport);
         }
 
         Long seed = (Long)parameters.getOrDefault(listOfParameters.SEED.toString(),

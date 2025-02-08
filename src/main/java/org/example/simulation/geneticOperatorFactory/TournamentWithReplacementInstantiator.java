@@ -1,12 +1,12 @@
 package org.example.simulation.geneticOperatorFactory;
 
 import org.example.geneticOperators.selection.TournamentWithReplacement;
-import org.example.simulation.ObjectInstancer;
+import org.example.simulation.ObjectInstantiator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class TournamentWithReplacementInstantiator implements ObjectInstancer<TournamentWithReplacement> {
+public class TournamentWithReplacementInstantiator implements ObjectInstantiator<TournamentWithReplacement> {
 
     private TournamentWithReplacement tournamentWithReplacement;
     private enum listOfParameters{

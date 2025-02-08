@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.Set;
 
 
-public class SinglePointMutation implements MutationWithReport {
+public class SinglePointMutation implements MutationWithReport<ReportMutation> {
 
     private final Random random = new SecureRandom();
     private final Movimentation movimentation;

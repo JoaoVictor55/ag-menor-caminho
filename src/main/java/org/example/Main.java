@@ -5,6 +5,9 @@ import org.example.geneticOperators.mutation.singlePointMutation.SinglePointMuta
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -13,23 +16,19 @@ public class Main {
         ENUM
     }
 
+    public static <T> List<T> foo(Supplier<T> supplier){
+
+        return Stream.generate(supplier).limit(5).collect(Collectors.toList());
+    }
+
     public static void main(String[] args) {
 
-        System.out.print(f.ENUM);
+        List<String> a = foo(String::new);
 
-        HashMap<Integer, List<Integer>> hashMap = new HashMap<>();
+        List<Object> b = new ArrayList<>();
 
-        List<Integer> a = new ArrayList<>();
+        b.add(Integer.class);
+        Object t = b.get(0).getClass();
 
-        Object p = a;
-
-        hashMap.put(1, new ArrayList<>());
-        hashMap.get(1).add(2);
-        hashMap.get(1).add(3);
-
-        Integer z = 10;
-
-        String thread = "null";
-        System.out.print(hashMap.getClass());
     }
 }
