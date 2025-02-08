@@ -2,12 +2,14 @@ package org.example.simulation.geneticOperatorFactory;
 
 import org.example.geneticOperators.mutation.singlePointMutation.SinglePointMutation;
 import org.example.movimentation.Movimentation;
+import org.example.simulation.ObjectConfigurator;
 import org.example.simulation.ObjectInstantiator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SinglePointMutationInstantiator implements ObjectInstantiator<SinglePointMutation> {
+public class SinglePointMutationInstantiator implements ObjectInstantiator<SinglePointMutation>,
+        ObjectConfigurator<SinglePointMutation> {
 
     private SinglePointMutation singlePointMutation;
 

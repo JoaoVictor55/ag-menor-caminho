@@ -5,9 +5,7 @@ import java.util.Map;
 public interface ObjectInstantiator<O>{
 
     O build(Map<String, Object> parameters) throws InstantiationException;
-    O configure(Map<String, Object> parameters);
     O getInstance();
-    Map<String, Object> getParametersList();
     Map<String, Object> getParametersListOfConstructor();
 
 }

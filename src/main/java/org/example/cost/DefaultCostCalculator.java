@@ -1,5 +1,6 @@
 package org.example.cost;
 
+import lombok.NonNull;
 import org.example.scenario.Scenario;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
@@ -13,7 +14,7 @@ public class DefaultCostCalculator implements CostCalculator {
     private final Movimentation movimentation;
 
 
-    public DefaultCostCalculator(Scenario scenario, Movimentation movimentation){
+    public DefaultCostCalculator(@NonNull Scenario scenario, @NonNull Movimentation movimentation){
 
         this.scenario = scenario;
         this.movimentation = movimentation;

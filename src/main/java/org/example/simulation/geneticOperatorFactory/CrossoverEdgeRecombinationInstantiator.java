@@ -2,12 +2,14 @@ package org.example.simulation.geneticOperatorFactory;
 
 import org.example.geneticOperators.crossover.crossoverRecombinacao.CrossoverEdgeRecombination;
 import org.example.movimentation.Movimentation;
+import org.example.simulation.ObjectConfigurator;
 import org.example.simulation.ObjectInstantiator;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrossoverEdgeRecombinationInstantiator implements ObjectInstantiator<CrossoverEdgeRecombination> {
+public class CrossoverEdgeRecombinationInstantiator implements ObjectInstantiator<CrossoverEdgeRecombination>,
+        ObjectConfigurator<CrossoverEdgeRecombination> {
 
     private CrossoverEdgeRecombination crossoverEdgeRecombination;
 
