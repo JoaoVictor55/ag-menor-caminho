@@ -7,8 +7,7 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class GuiaDefaultMovimentation {
-
+public class GuideDefaultMovimentation {
 
     public static void main(String [] args){
 

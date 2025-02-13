@@ -44,7 +44,7 @@ public class TournamentWithReplacementInstantiator implements ObjectInstantiator
         if(seed == null)
             this.tournamentWithReplacement = new TournamentWithReplacement(tournamentSize);
         else
-            this.tournamentWithReplacement = new TournamentWithReplacement(tournamentSize, seed);
+            this.tournamentWithReplacement = new TournamentWithReplacement(tournamentSize);
 
         return this.tournamentWithReplacement;
     }

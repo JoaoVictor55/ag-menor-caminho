@@ -8,7 +8,7 @@ import org.example.scenario.Scenario;
 import java.awt.*;
 import java.util.Arrays;
 
-public class GuiaIndividuo {
+public class GuideIndividual {
 
     public static void main(String [] args){
 

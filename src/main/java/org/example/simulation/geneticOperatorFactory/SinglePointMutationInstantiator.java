@@ -43,7 +43,7 @@ public class SinglePointMutationInstantiator implements ObjectInstantiator<Singl
         }
 
 
-        this.singlePointMutation = new SinglePointMutation(seed, movimentation, mutationProbability, maxIteration);
+        this.singlePointMutation = new SinglePointMutation(movimentation, mutationProbability, maxIteration);
 
         return this.singlePointMutation;
     }

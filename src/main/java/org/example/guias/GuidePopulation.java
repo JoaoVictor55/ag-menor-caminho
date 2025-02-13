@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.awt.*;
 
-public class GuiaPopulacao {
+public class GuidePopulation {
 
     private static Scenario scenario = new Scenario(10, 10, 30l);
     private static Point startPoint = new Point(0, 0);

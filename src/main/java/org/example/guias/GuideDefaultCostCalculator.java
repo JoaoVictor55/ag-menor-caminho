@@ -7,7 +7,7 @@ import org.example.scenario.Scenario;
 
 import java.awt.*;
 
-public class GuiaCalculadoraDeCusto {
+public class GuideDefaultCostCalculator {
 
     public static void main(String [] args){
 

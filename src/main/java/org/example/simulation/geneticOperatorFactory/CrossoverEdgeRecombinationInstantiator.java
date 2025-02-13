@@ -24,7 +24,7 @@ public class CrossoverEdgeRecombinationInstantiator implements ObjectInstantiato
     public CrossoverEdgeRecombination build(Map<String, Object> parameters) throws InstantiationException {
 
 
-        Long seed = (Long)parameters.getOrDefault(listOfParameters.SEED.toString(), null);
+
         Movimentation movimentation = (Movimentation)parameters.getOrDefault(listOfParameters.MOVIMENTATION.toString(),
                 null);
 
@@ -32,7 +32,7 @@ public class CrossoverEdgeRecombinationInstantiator implements ObjectInstantiato
             throw new InstantiationException("Movimentation argument is missing");
         }
 
-        this.crossoverEdgeRecombination = new CrossoverEdgeRecombination(seed, movimentation);
+        this.crossoverEdgeRecombination = new CrossoverEdgeRecombination(movimentation);
 
         return crossoverEdgeRecombination;
     }

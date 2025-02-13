@@ -32,22 +32,17 @@ public class SinglePointMutation implements MutationWithReport<ReportMutation> {
     @Setter
     private double mutationProbability;
 
-    public SinglePointMutation(Long seed, Movimentation movimentation, double mutationProbability
+    public SinglePointMutation(Movimentation movimentation, double mutationProbability
                          ){
 
-        this(seed, movimentation, mutationProbability, 10000);
+        this(movimentation, mutationProbability, 10000);
     }
 
-    public SinglePointMutation(Long seed, Movimentation movimentation, double mutationProbability,
+    public SinglePointMutation(Movimentation movimentation, double mutationProbability,
                                int maxIterations){
 
         this.movimentation = movimentation;
 
-        if(seed != null){
-            this.random.setSeed(seed);
-        }
-
-        this.seed = seed;
         this.mutationProbability = mutationProbability;
         this.maxIterations = maxIterations;
     }

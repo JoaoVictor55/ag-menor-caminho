@@ -26,15 +26,10 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
     private Boolean activeReport = false;
 
 
-    public CrossoverEdgeRecombination(Long seed, Movimentation movimentation){
+    public CrossoverEdgeRecombination(Movimentation movimentation){
 
         this.movimentation = movimentation;
 
-        this.seed = seed;
-        if(seed != null){
-
-            random.setSeed(this.seed);
-        }
 
     }
 

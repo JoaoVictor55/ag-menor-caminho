@@ -19,18 +19,16 @@ public class TournamentWithReplacement extends SelectionBase {
     @Getter
     private Long seed;
 
-    public TournamentWithReplacement(int tournamentSize, Long seed){
+    public TournamentWithReplacement(int tournamentSize){
 
-        this.seed = seed;
+
 
         if(tournamentSize < 0){
             throw new IllegalArgumentException("O tamanho do torneio tem que ser positivo");
         }
 
         this.tournamentSize = tournamentSize;
-        if(seed != null){
-            random.setSeed(this.seed);
-        }
+
 
     }
 
@@ -40,9 +38,6 @@ public class TournamentWithReplacement extends SelectionBase {
         random.setSeed(this.seed);
     }
 
-    public TournamentWithReplacement(int tournamentSize){
-        this(tournamentSize, null);
-    }
 
     @Override
     public Population select(Population population, int number) {

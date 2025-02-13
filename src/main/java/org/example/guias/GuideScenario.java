@@ -5,7 +5,7 @@ import org.example.scenario.Scenario;
 import java.awt.*;
 import java.util.Arrays;
 
-public class GuiaCenario {
+public class GuideScenario {
 
     public static void main(String []args){
 

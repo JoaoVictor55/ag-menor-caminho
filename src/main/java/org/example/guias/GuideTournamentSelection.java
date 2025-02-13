@@ -9,10 +9,9 @@ import org.example.scenario.Scenario;
 import org.example.uteis.GerarAleatorios;
 
 import java.awt.*;
-import java.util.Iterator;
 import java.util.List;
 
-public class GuiaTournamentSelection {
+public class GuideTournamentSelection {
 
     private static Scenario scenario = new Scenario(10, 10, 30l);
 
@@ -35,7 +34,7 @@ public class GuiaTournamentSelection {
         //tournamentsize = quantos indivíduos são selecionados para cada torneio
         //Exemplo: se tournamentsize for 10, então a cada torneio, são selecionados 10 indivíduos. O vencedor
         //sai desses 10
-        TournamentWithReplacement tournamentWithReplacement = new TournamentWithReplacement(10, 10l);
+        TournamentWithReplacement tournamentWithReplacement = new TournamentWithReplacement(10);
 
         //gerando uma população aleatória:
         List<Individual> p = gerarAleatorios.gerarAleatorios(startPoint, endPoint, 100, 10000);
