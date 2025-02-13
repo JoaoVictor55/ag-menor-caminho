@@ -8,7 +8,9 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Representa uma solução individual
+ * */
 public class Individual implements Comparable<Individual> {
 
     @Setter
@@ -22,11 +24,9 @@ public class Individual implements Comparable<Individual> {
 
     private Double cost;
 
-    private boolean reCalculateCost = true;
-    private boolean reCheckCost = true;
-
-
+    private boolean reCalculateCost;
     private Boolean isValid = null;
+    private boolean reCheckValidity;
 
     public Individual(Movimentation movimentation, CostCalculator costCalculator){
         this(movimentation, costCalculator, new ArrayList<>());
@@ -37,6 +37,9 @@ public class Individual implements Comparable<Individual> {
         this.costCalculator = costCalculator;
         this.movimentation = movimentation;
         this.path = new ArrayList<>(path);
+
+        this.reCheckValidity = true;
+        this.reCalculateCost = true;
     }
 
     public void addPositionAt(int where, Point position){
@@ -46,7 +49,7 @@ public class Individual implements Comparable<Individual> {
         if(where >= 0)
             this.path.add(where, position);
         else{
-            this.path.add(this.path.size() + where, position);
+            this.path.add(this.path.size() + where+1, position);
         }
     }
 
@@ -62,12 +65,12 @@ public class Individual implements Comparable<Individual> {
         return copyOfPath;
     }
 
-    public void pushPosition(Point posicao){
+    public void add(Point position){
         pathWasChanged();
-        this.path.add(posicao);
+        this.path.add(position);
     }
 
-    public Point removePosition(int where){
+    public Point remove(int where){
         pathWasChanged();
         if(where >= 0)
             return this.path.remove(where);
@@ -88,28 +91,28 @@ public class Individual implements Comparable<Individual> {
     private void setCost(){
 
         this.cost = costCalculator.calculateCost(this);
-        reCalculateCost = false;
+        this.reCalculateCost = false;
     }
 
     public Double getCost(){
 
-        if(reCalculateCost){
+        if(this.reCalculateCost){
             setCost();
         }
         return this.cost;
     }
 
-    public int getSize(){
+    public int size(){
 
         return this.path.size();
     }
 
     public boolean isValid(){
 
-        if(reCheckCost){
+        if(this.reCheckValidity){
 
             isValid = this.movimentation.isValid(path);
-            reCheckCost = false;
+            reCheckValidity = false;
         }
 
         return isValid;
@@ -122,6 +125,7 @@ public class Individual implements Comparable<Individual> {
         return costCalculator.compare(this, o);
     }
 
+    /*
     @Override
     public String toString(){
 
@@ -138,14 +142,15 @@ public class Individual implements Comparable<Individual> {
         inString.append(isValid());
 
         return inString.toString();
-    }
+    }*/
+
 
 
     private void pathWasChanged(){
 
 
         this.reCalculateCost = true;
-        this.reCheckCost = true;
+        this.reCheckValidity = true;
 
     }
 

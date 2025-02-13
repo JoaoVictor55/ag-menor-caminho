@@ -101,7 +101,7 @@ public class SinglePointMutation implements MutationWithReport<ReportMutation> {
 
         if(random.nextFloat() < mutationProbability){
 
-            int where = random.nextInt(1, individual.getSize()-1);
+            int where = random.nextInt(1, individual.size()-1);
             Set<Integer> numbersAlreadyDrawn = new HashSet<>();
             numbersAlreadyDrawn.add(where);
             while(!doMutation(individual,where)){
@@ -112,7 +112,7 @@ public class SinglePointMutation implements MutationWithReport<ReportMutation> {
                 }
                 while(numbersAlreadyDrawn.contains(where)){
                     --maxIterations;
-                    where = random.nextInt(1, individual.getSize()-1);
+                    where = random.nextInt(1, individual.size()-1);
                     if(maxIterations <= 0){
                         break;
                     }

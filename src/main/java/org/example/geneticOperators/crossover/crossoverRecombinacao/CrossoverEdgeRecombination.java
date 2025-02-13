@@ -1,8 +1,6 @@
 package org.example.geneticOperators.crossover.crossoverRecombinacao;
 
 import lombok.Getter;
-import org.example.geneticOperators.OperatorWithReport;
-import org.example.geneticOperators.crossover.Crossover;
 import org.example.geneticOperators.crossover.CrossoverWithReport;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
@@ -54,7 +52,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
         Set<Point> fatherEdges = new HashSet<>();
 
         //preenche a matriz de adjacência com as adjacências dos nós do father.
-        for(int indiceNo = 0; indiceNo < father.getSize()-1; ++indiceNo){
+        for(int indiceNo = 0; indiceNo < father.size()-1; ++indiceNo){
 
             fatherEdges.add(father.getPosition(indiceNo));
             adjacencyMatrix.putIfAbsent(father.getPosition(indiceNo), new ArrayList<>());
@@ -66,7 +64,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
         higherPriority.add(father.getPosition(-2));
 
         //preenche a adjacência com os nós encontrados na mãe
-        for(int indiceNo = 0; indiceNo < mother.getSize() - 1; ++indiceNo){
+        for(int indiceNo = 0; indiceNo < mother.size() - 1; ++indiceNo){
 
             adjacencyMatrix.putIfAbsent(mother.getPosition(indiceNo), new ArrayList<>());
 
@@ -125,7 +123,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
         initializeMatrices(father, mother, adjacencyMatrix, higherPriority, commonEdges);
 
         Individual offSprings = new Individual(movimentation, father.getCostCalculator());
-        offSprings.pushPosition(father.getPosition(0));
+        offSprings.add(father.getPosition(0));
         Point added = offSprings.getPosition(0);
 
         //quando um nó é adicionado ao filho, elimina-se ele da lista de possíveis
@@ -141,7 +139,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
             if(adjacencyMatrix.get(added).contains(mother.getPosition(-1))){
 
                 Point p = mother.getPosition(-1);
-                offSprings.pushPosition(p);
+                offSprings.add(p);
                 this.writeReport(ReportEdgeRecombinationComposer.TypeChange.FINAL, p,
                         added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 break;
@@ -161,10 +159,10 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
 
                 if(higherPriority.contains(adjacency)){
 
-                    offSprings.pushPosition(adjacency);
+                    offSprings.add(adjacency);
                     this.writeReport(ReportEdgeRecombinationComposer.TypeChange.NEXT_FINAL,
                             adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
-                    offSprings.pushPosition(mother.getPosition(-1));
+                    offSprings.add(mother.getPosition(-1));
                     this.writeReport(ReportEdgeRecombinationComposer.TypeChange.FINAL,
                             mother.getPosition(-1), added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     keepGoing = false;
@@ -176,7 +174,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
                 }
 
                 if(commonEdges.contains(adjacency)){
-                    offSprings.pushPosition(adjacency);
+                    offSprings.add(adjacency);
 
                     if(deletadosQuantidade == adjacencyMatrix.get(added).size()-1){
                         this.writeReport(ReportEdgeRecombinationComposer.TypeChange.ONLY_OPTION,
@@ -203,7 +201,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
             //caso ele não achou nenhum comum porém a lista de adjacência do nó não é vazia
             if(!found && keepGoing && possibleEdge != null){
 
-                offSprings.pushPosition(possibleEdge);
+                offSprings.add(possibleEdge);
 
                 if(deletadosQuantidade == adjacencyMatrix.get(added).size()-1){
                     this.writeReport(ReportEdgeRecombinationComposer.TypeChange.ONLY_OPTION, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
@@ -215,7 +213,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
 
             } else if (!found && keepGoing) {
 
-                offSprings.removePosition(-1);
+                offSprings.remove(-1);
                 added = offSprings.getPosition(-1);
             }
         }

@@ -43,13 +43,13 @@ public class GerarAleatorios {
         for(int a = 0; a < quantidade; ++a){
 
             Individual individual = new Individual(movimentation, costCalculator);
-            individual.pushPosition(inicio);
+            individual.add(inicio);
 
             List<Point> posiveis = movimentation.possiblePaths(inicio);
 
             Point posivel = posiveis.get(random.nextInt(0, posiveis.size()));
 
-            individual.pushPosition(posivel);
+            individual.add(posivel);
             gerados.add(individual);
 
             for(long iteracoes = 0;!posivel.equals(fim) && iteracoes <= maximoInteracoes; ++iteracoes){
@@ -57,7 +57,7 @@ public class GerarAleatorios {
                 posiveis = movimentation.possiblePaths(posivel);
                 posivel = posiveis.get(random.nextInt(0, posiveis.size()));
 
-                individual.pushPosition(posivel);
+                individual.add(posivel);
 
             }
 

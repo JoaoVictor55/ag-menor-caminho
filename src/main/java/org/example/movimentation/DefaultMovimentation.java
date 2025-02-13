@@ -9,6 +9,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Movimentação que permite ir nos 8 pontos cardeais: cima, baixo, direita, esquerda e diagonais. Permite <br>
+ * Apenas uma casa por vez.
+ * Um caminho é válido se segue a lógica acima e vai da origem até o destino
+ * */
+
 @Getter
 @ToString
 public class DefaultMovimentation implements Movimentation {
@@ -83,12 +89,18 @@ public class DefaultMovimentation implements Movimentation {
         return possibilities;
     }
 
+    /**
+     * @return true se o caminho é válido: isto é, obedece a lógica e vai do ponto inicial até o final
+     * pre definido
+     * */
     @Override
     public boolean isValid(List<Point> path) {
 
+        if (path.isEmpty()) return false;
+
         Point currentPoint = path.get(0);
 
-        if (!currentPoint.equals(this.startPoint) && !path.get(path.size()-1).equals(this.endPoint)){
+        if (!currentPoint.equals(this.startPoint) || !path.get(path.size()-1).equals(this.endPoint)){
 
             return false;
         }

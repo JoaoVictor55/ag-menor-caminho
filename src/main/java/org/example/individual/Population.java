@@ -1,22 +1,15 @@
 package org.example.individual;
 
-import lombok.Getter;
 import lombok.ToString;
-import org.example.geneticOperators.StochasticOperator;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 @ToString
-public class Population implements StochasticOperator {
+public class Population implements  Iterable<Individual>{
 
     @ToString.Exclude
     private final List<Individual> population;
-
-    @ToString.Exclude
-    private final Random random;
-
-    @Getter
-    private Long seed;
 
     private Double average;
     private Double sd;
@@ -29,37 +22,29 @@ public class Population implements StochasticOperator {
     private boolean reCheckWorst = true;
     private boolean reCheckBest = true;
 
-    public Population(Long seed){
-
-        this(new ArrayList<>(), seed);
-    }
 
     public Population(){
-        this(new ArrayList<>(),null);
+        this(new ArrayList<>());
     }
 
-    public Population(List<Individual> population, Long seed){
+    public Population(List<Individual> population){
 
         this.population = population;
-        random = new Random();
-
-        if (seed != null)
-            random.setSeed(seed);
     }
 
-    public int getSize(){
+    public int size(){
 
         return this.population.size();
     }
 
-    public void addIndividual(List<Individual> individuals){
+    public void addAll(List<Individual> individuals){
 
         this.population.addAll(individuals);
         populationWasChanged();
 
     }
 
-    public void pushIndividual(Individual i){
+    public void add(Individual i){
 
         population.add(i);
 
@@ -85,22 +70,25 @@ public class Population implements StochasticOperator {
 
     }
 
-    public Individual getRandomIndividual(){
+
+    public Individual get(int where){
         populationWasChanged();
-        return this.population.get(random.nextInt(0, this.population.size()));
+        if(where < 0){
+
+            return this.population.get(this.size() + where + 1);
+        }
+
+        return this.population.get(where);
+
     }
 
+    @Deprecated
     public void shuffle(){
 
         Collections.shuffle(population);
     }
 
-    public Individual removeRandomIndividual(){
-        populationWasChanged();
-        return this.population.remove(random.nextInt(0, this.population.size()));
-    }
-
-    public Individual removeIndividualWhere(int where){
+    public Individual remove(int where){
         populationWasChanged();
         return this.population.remove(where);
     }
@@ -147,19 +135,24 @@ public class Population implements StochasticOperator {
         return worst;
     }
 
-    @Override
-    public void setSeed(long seed){
+    public List<Individual> toList(){
 
-        this.seed = seed;
-        random.setSeed(seed);
+        populationWasChanged();
+        return this.population;
+    }
+
+    public Iterator<Individual> iterator(){
+
+        return this.population.iterator();
     }
 
 
-    public List<Individual> obterIndividuos(){
+    /*
+    public List<Individual> getIndividuals(){
 
         populationWasChanged();
         return population;
-    }
+    }*/
 
 
     private void findBest(){
@@ -223,5 +216,6 @@ public class Population implements StochasticOperator {
 
         reCheckWorst = false;
     }
+
 
 }

@@ -27,8 +27,8 @@ public class VisualizarCenario extends Frame {
 
         setVisible(true);
 
-        if(population.getSize() != 0)
-            this.exiba = population.obterIndividuos().get(0);
+        if(population.size() != 0)
+            this.exiba = population.get(0);
 
         this.scenario = scenario;
         this.population = population;
@@ -100,25 +100,25 @@ public class VisualizarCenario extends Frame {
 
     private void desenhaProximo(Population population) {
         ++indice;
-        if(indice >= population.getSize()){
+        if(indice >= population.size()){
             indice = 0;
         }
 
-        exiba = population.obterIndividuos().get(indice);
+        exiba = population.get(indice);
         this.indiceTxt.setText(String.format("(%d)",indice));
-        this.custoTxt.setText(String.format("(%f)", population.obterIndividuos().get(indice).getCost()));
+        this.custoTxt.setText(String.format("(%f)", population.get(indice).getCost()));
         repaint();
     }
 
     private void desenhaAnterior(Population population) {
         --indice;
         if(indice < 0){
-            indice = population.getSize()-1;
+            indice = population.size()-1;
         }
 
-        exiba = population.obterIndividuos().get(indice);
+        exiba = population.get(indice);
         this.indiceTxt.setText(String.format("(%d)",indice));
-        this.custoTxt.setText(String.format("(%f)", population.obterIndividuos().get(indice).getCost()));
+        this.custoTxt.setText(String.format("(%f)", population.get(indice).getCost()));
         repaint();
     }
 
@@ -135,7 +135,7 @@ public class VisualizarCenario extends Frame {
 
         private void desenharCaminhos(Graphics g) {
 
-            if (population == null || population.getSize() < 1)
+            if (population == null || population.size() < 1)
                 return;
 
             var individuo = exiba;
@@ -144,7 +144,7 @@ public class VisualizarCenario extends Frame {
 
             Point pFinal;
 
-            for (int ponto = 1; ponto < individuo.getSize(); ++ponto) {
+            for (int ponto = 1; ponto < individuo.size(); ++ponto) {
 
                 pFinal = individuo.getPosition(ponto);
 

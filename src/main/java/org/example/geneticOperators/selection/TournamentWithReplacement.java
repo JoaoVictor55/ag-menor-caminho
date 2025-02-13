@@ -47,13 +47,13 @@ public class TournamentWithReplacement extends SelectionBase {
     @Override
     public Population select(Population population, int number) {
 
-        Population selected = new Population(population.getSeed());
+        Population selected = new Population();
 
-        while(selected.getSize() < number){
+        while(selected.size() < number){
 
-            Optional<Individual> parents = Arrays.stream(getSample(population.obterIndividuos(), this.tournamentSize)).min(Individual::compareTo);
+            Optional<Individual> parents = Arrays.stream(getSample(population.toList(), this.tournamentSize)).min(Individual::compareTo);
 
-            parents.ifPresent(selected::pushIndividual);
+            parents.ifPresent(selected::add);
         }
 
         return selected;

@@ -9,6 +9,7 @@ import org.example.geneticOperators.crossover.Crossover;
 import org.example.geneticOperators.selection.Selection;
 import org.example.geneticOperators.mutation.Mutation;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class GeneticAlgorithm implements StochasticOperator {
     private Crossover crossover;
     private Long seed;
 
+    private SecureRandom random;
+
     @Setter
     @Getter
     private boolean makeOffspringReport;
@@ -30,10 +33,12 @@ public class GeneticAlgorithm implements StochasticOperator {
     public GeneticAlgorithm(Selection selection, Mutation mutation, Crossover crossover, Long seed){
         this.selection = selection;
         this.mutation = mutation;
+        this.random = new SecureRandom();
         this.crossover = crossover;
         if(seed != null){
             this.setSeed(seed);
             this.seed = seed;
+
         }
     }
 
@@ -48,15 +53,15 @@ public class GeneticAlgorithm implements StochasticOperator {
 
         for(int a = 0; a < elitism; ++a){
 
-            newPopulation.pushIndividual(parentsPopulation.obterIndividuos().get(a));
+            newPopulation.add(parentsPopulation.get(a));
         }
 
         Population parents  = selection.select(parentsPopulation, 2*sizeGeneratedPopulation);
 
-        while(newPopulation.getSize() < sizeGeneratedPopulation){
+        while(newPopulation.size() < sizeGeneratedPopulation){
 
-            Individual father = parents.getRandomIndividual();
-            Individual mother = parents.getRandomIndividual();
+            Individual father = parents.get(this.random.nextInt(0, parents.size()));
+            Individual mother = parents.get(this.random.nextInt(0, parents.size()));
            List<Individual> offspring = crossover.crossover(father, mother);
 
             makeOffspringGenerationReport(father, mother, offspring);
@@ -66,7 +71,7 @@ public class GeneticAlgorithm implements StochasticOperator {
                 mutation.mutate(i);
             }
 
-            newPopulation.addIndividual(offspring);
+            newPopulation.addAll(offspring);
 
         }
 
@@ -108,6 +113,7 @@ public class GeneticAlgorithm implements StochasticOperator {
     @Override
     public void setSeed(long seed) {
 
+        this.random.setSeed(seed);
         selection.setSeed(seed);
         mutation.setSeed(seed);
         crossover.setSeed(seed);
