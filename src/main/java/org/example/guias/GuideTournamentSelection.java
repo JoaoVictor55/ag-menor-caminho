@@ -2,6 +2,7 @@ package org.example.guias;
 
 import org.example.cost.DefaultCostCalculator;
 import org.example.geneticOperators.selection.TournamentWithReplacement;
+import org.example.guias.tools.BuildExamples;
 import org.example.individual.Individual;
 import org.example.individual.Population;
 import org.example.movimentation.DefaultMovimentation;
@@ -22,8 +23,8 @@ public class GuideTournamentSelection {
 
     private static Point startPoint = new Point(0, 0);
     private static Point endPoint = new Point(9,9);
-    private static DefaultMovimentation defaultMovimentation = new DefaultMovimentation(scenario, startPoint, endPoint);
-    private static DefaultCostCalculator defaultCostCalculator = new DefaultCostCalculator(defaultMovimentation.getScenario(),
+    private static DefaultMovimentation defaultMovimentation = BuildExamples.buildDefautMovimentation(startPoint, endPoint, scenario);
+    private static DefaultCostCalculator defaultCostCalculator = BuildExamples.buildDefaultCostCalculator(defaultMovimentation.getScenario(),
             defaultMovimentation);
 
     private static GerarAleatorios gerarAleatorios = new GerarAleatorios(defaultCostCalculator, defaultMovimentation,
@@ -37,22 +38,27 @@ public class GuideTournamentSelection {
         TournamentWithReplacement tournamentWithReplacement = new TournamentWithReplacement(10);
 
         //gerando uma população aleatória:
-        List<Individual> p = gerarAleatorios.gerarAleatorios(startPoint, endPoint, 100, 10000);
+        List<Individual> p = gerarAleatorios.gerarAleatorios(startPoint, endPoint, 30, 10000);
 
         Population population = new Population();
         population.addAll(p);
+
 
         //selecionando 2 indivídos atrás do torneio:
         Population selected = tournamentWithReplacement.select(population, 2);
 
         System.out.println("Custo dos indivíduos selecionados:");
 
-        for (Individual individual : population) {
+        for (Individual individual : selected) {
 
             System.out.println(individual.getCost());
         }
 
-        System.out.println("Resto da população:");
+        System.out.println("\nResto da população:");
+        for(Individual individual : population){
+
+            System.out.println(individual.getCost());
+        }
 
     }
 }

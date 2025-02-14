@@ -1,6 +1,7 @@
 package org.example.guias;
 
 import org.example.cost.DefaultCostCalculator;
+import org.example.guias.tools.BuildExamples;
 import org.example.individual.Individual;
 import org.example.individual.Population;
 import org.example.movimentation.DefaultMovimentation;
@@ -13,11 +14,11 @@ import java.awt.*;
 
 public class GuidePopulation {
 
-    private static Scenario scenario = new Scenario(10, 10, 30l);
+    private static Scenario scenario = BuildExamples.buildScanerio(10, 10);
     private static Point startPoint = new Point(0, 0);
     private static Point endPoint = new Point(9,9);
-    private static DefaultMovimentation defaultMovimentation = new DefaultMovimentation(scenario, startPoint, endPoint);
-    private static DefaultCostCalculator defaultCostCalculator = new DefaultCostCalculator(defaultMovimentation.getScenario(),
+    private static DefaultMovimentation defaultMovimentation = BuildExamples.buildDefautMovimentation(startPoint, endPoint, scenario);
+    private static DefaultCostCalculator defaultCostCalculator = BuildExamples.buildDefaultCostCalculator(defaultMovimentation.getScenario(),
             defaultMovimentation);
 
     private static GerarAleatorios gerarAleatorios = new GerarAleatorios(defaultCostCalculator, defaultMovimentation,

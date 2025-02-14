@@ -1,5 +1,6 @@
 package org.example.guias;
 
+import org.example.guias.tools.BuildExamples;
 import org.example.movimentation.DefaultMovimentation;
 import org.example.scenario.Scenario;
 
@@ -11,7 +12,7 @@ public class GuideDefaultMovimentation {
 
     public static void main(String [] args){
 
-        Scenario scenario = new Scenario(10, 10); //definindo o cenário
+        Scenario scenario = BuildExamples.buildScanerio(10, 10); //definindo o cenário
 
         //definindo os pontos iniciais e finais do cenário
         Point startPoint = new Point(0, 0);

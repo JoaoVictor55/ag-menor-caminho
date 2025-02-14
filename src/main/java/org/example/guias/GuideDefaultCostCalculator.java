@@ -1,6 +1,7 @@
 package org.example.guias;
 
 import org.example.cost.DefaultCostCalculator;
+import org.example.guias.tools.BuildExamples;
 import org.example.individual.Individual;
 import org.example.movimentation.DefaultMovimentation;
 import org.example.scenario.Scenario;
@@ -11,14 +12,14 @@ public class GuideDefaultCostCalculator {
 
     public static void main(String [] args){
 
-        Scenario scenario = new Scenario(10, 10); //definindo o cenário
+        Scenario scenario = BuildExamples.buildScanerio(10, 10); //definindo o cenário
 
         //definindo os pontos iniciais e finais do cenário
         Point startPoint = new Point(0, 0);
         Point endPoint = new Point(9,9);
 
         //construindo a movimentação
-        DefaultMovimentation defaultMovimentation = new DefaultMovimentation(scenario, startPoint, endPoint);
+        DefaultMovimentation defaultMovimentation = BuildExamples.buildDefautMovimentation(startPoint, endPoint, scenario);
 
         DefaultCostCalculator defaultCostCalculator = new DefaultCostCalculator(defaultMovimentation.getScenario(),
                 defaultMovimentation);

@@ -1,6 +1,7 @@
 package org.example.guias;
 
 import org.example.cost.DefaultCostCalculator;
+import org.example.guias.tools.BuildExamples;
 import org.example.individual.Individual;
 import org.example.movimentation.DefaultMovimentation;
 import org.example.scenario.Scenario;
@@ -12,7 +13,7 @@ public class GuideIndividual {
 
     public static void main(String [] args){
 
-        Scenario scenario = new Scenario(10, 10, 30l); //definindo o cenário
+        Scenario scenario = BuildExamples.buildScanerio(10, 10); //definindo o cenário
 
         //definindo os pontos iniciais e finais do cenário
         Point startPoint = new Point(0, 0);
