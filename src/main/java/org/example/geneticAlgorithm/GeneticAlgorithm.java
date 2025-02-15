@@ -28,7 +28,7 @@ public class GeneticAlgorithm implements StochasticOperator {
     @Getter
     private boolean makeOffspringReport;
 
-    private List<OffspringGenerationReport> offspringGenerationReports;
+    private List<OffspringGenerationSteps> offspringGenerationSteps;
 
     public GeneticAlgorithm(Selection selection, Mutation mutation, Crossover crossover, Long seed){
         this.selection = selection;
@@ -91,17 +91,17 @@ public class GeneticAlgorithm implements StochasticOperator {
                         offspring.getPath()));
             }
 
-            offspringGenerationReports.add(new OffspringGenerationReport(fatherCopy, motherCopy, offspringsCopy));
+            offspringGenerationSteps.add(new OffspringGenerationSteps(fatherCopy, motherCopy, offspringsCopy));
 
         }
     }
 
-    public List<OffspringGenerationReport> getOffspringGenerationReport(){
+    public List<OffspringGenerationSteps> getOffspringGenerationSteps(){
 
         if(!isMakeOffspringReport()) return null;
 
-        List<OffspringGenerationReport> offspringGenerationReportsCopy = this.offspringGenerationReports;
-        this.offspringGenerationReports = new ArrayList<>();
+        List<OffspringGenerationSteps> offspringGenerationReportsCopy = this.offspringGenerationSteps;
+        this.offspringGenerationSteps = new ArrayList<>();
         return offspringGenerationReportsCopy;
     }
 

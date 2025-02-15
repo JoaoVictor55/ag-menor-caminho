@@ -1,10 +1,10 @@
-package org.example.geneticOperators.crossover.crossoverRecombinacao;
+package org.example.geneticOperators.crossover.crossoverRecombination;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public record ReportEdgeRecombination(
+public record StepsEdgeRecombination(
         ArrayList<String> reasons,
         ArrayList<Point> chosen,
         ArrayList<Point> adjacentTo,

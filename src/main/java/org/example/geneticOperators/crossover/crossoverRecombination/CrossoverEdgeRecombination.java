@@ -1,7 +1,7 @@
-package org.example.geneticOperators.crossover.crossoverRecombinacao;
+package org.example.geneticOperators.crossover.crossoverRecombination;
 
 import lombok.Getter;
-import org.example.geneticOperators.crossover.CrossoverWithReport;
+import org.example.geneticOperators.crossover.CrossoverWithSteps;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 
@@ -12,7 +12,7 @@ import java.security.SecureRandom;
 import java.util.*;
 import java.util.List;
 
-public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdgeRecombination> {
+public class CrossoverEdgeRecombination implements CrossoverWithSteps<StepsEdgeRecombination> {
 
     @Getter
     private Long seed;
@@ -21,7 +21,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
 
     private final Random random = new SecureRandom();
 
-    private ReportEdgeRecombinationComposer reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
+    private StepsEdgeRecombinationComposer stepsEdgeRecombinationComposer = new StepsEdgeRecombinationComposer();
 
     private Boolean activeReport = false;
 
@@ -135,7 +135,7 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
 
                 Point p = mother.getPosition(-1);
                 offSprings.add(p);
-                this.writeReport(ReportEdgeRecombinationComposer.TypeChange.FINAL, p,
+                this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.FINAL, p,
                         added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 break;
             }
@@ -155,10 +155,10 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
                 if(higherPriority.contains(adjacency)){
 
                     offSprings.add(adjacency);
-                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.NEXT_FINAL,
+                    this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.NEXT_FINAL,
                             adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     offSprings.add(mother.getPosition(-1));
-                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.FINAL,
+                    this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.FINAL,
                             mother.getPosition(-1), added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     keepGoing = false;
                     break;
@@ -172,11 +172,11 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
                     offSprings.add(adjacency);
 
                     if(deletadosQuantidade == adjacencyMatrix.get(added).size()-1){
-                        this.writeReport(ReportEdgeRecombinationComposer.TypeChange.ONLY_OPTION,
+                        this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.ONLY_OPTION,
                                 adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                     }
                     else
-                        this.writeReport(ReportEdgeRecombinationComposer.TypeChange.COMUM,
+                        this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.COMUM,
                                 adjacency, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
 
                     added = adjacency;
@@ -199,10 +199,10 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
                 offSprings.add(possibleEdge);
 
                 if(deletadosQuantidade == adjacencyMatrix.get(added).size()-1){
-                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.ONLY_OPTION, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                    this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.ONLY_OPTION, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 }
                 else
-                    this.writeReport(ReportEdgeRecombinationComposer.TypeChange.RANDOM, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
+                    this.writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange.RANDOM, possibleEdge, added,adjacencyMatrix.get(added), edgesAlreadyUsed);
                 edgesAlreadyUsed.add(possibleEdge);
                 added = offSprings.getPosition(-1);
 
@@ -216,35 +216,35 @@ public class CrossoverEdgeRecombination implements CrossoverWithReport<ReportEdg
         return List.of(offSprings);
     }
 
-    private void writeReport(ReportEdgeRecombinationComposer.TypeChange reason, Point chosen,
-                             Point adjacentTo, List<Point> adjacency,
-                             Set<Point> deleted){
+    private void writeStepsRecord(StepsEdgeRecombinationComposer.TypeChange reason, Point chosen,
+                                  Point adjacentTo, List<Point> adjacency,
+                                  Set<Point> deleted){
         if(activeReport){
 
             List<Point> points = adjacency.stream().filter(p-> !deleted.contains(p) || (p.equals(chosen))).toList();
 
-            reportEdgeRecombinationComposer.addReport(reason.toString(), chosen, adjacentTo,
+            stepsEdgeRecombinationComposer.addRecordSteps(reason.toString(), chosen, adjacentTo,
                     points);
         }
     }
 
     @Override
-    public boolean isReportActive(){
+    public boolean isStepsRecordActive(){
 
         return this.activeReport;
     }
 
 
     @Override
-    public ReportEdgeRecombination getReport() {
+    public StepsEdgeRecombination getSteps() {
 
-        var bff = reportEdgeRecombinationComposer.getRecord();
-        this.reportEdgeRecombinationComposer = new ReportEdgeRecombinationComposer();
+        var bff = stepsEdgeRecombinationComposer.getSteps();
+        this.stepsEdgeRecombinationComposer = new StepsEdgeRecombinationComposer();
         return bff;
     }
 
     @Override
-    public void setActiveReport(boolean activeReport) {
+    public void recordSteps(boolean activeReport) {
         this.activeReport = activeReport;
     }
 }

@@ -55,7 +55,7 @@ public class SinglePointMutationInstantiator implements ObjectInstantiator<Singl
                 null);
 
         if(activeMutationReport != null){
-            this.singlePointMutation.setActiveReport(activeMutationReport);
+            this.singlePointMutation.recordSteps(activeMutationReport);
         }
 
         Long seed = (Long)parameters.getOrDefault(listOfParameters.SEED.toString(),

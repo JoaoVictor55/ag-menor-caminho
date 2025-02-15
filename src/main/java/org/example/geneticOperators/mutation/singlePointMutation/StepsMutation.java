@@ -1,13 +1,13 @@
 package org.example.geneticOperators.mutation.singlePointMutation;
 
-import org.example.geneticOperators.mutation.MutationWithReport;
+import org.example.geneticOperators.mutation.MutationWithSteps;
 
 import java.awt.*;
 
-public record ReportMutation(
+public record StepsMutation(
         int whereHappened,
         Point originalPoint,
         Point newPoint,
-        MutationWithReport.Type reason
+        MutationWithSteps.Type reason
 ) {
 }

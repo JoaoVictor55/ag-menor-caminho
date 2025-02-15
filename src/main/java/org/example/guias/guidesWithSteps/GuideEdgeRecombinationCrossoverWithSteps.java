@@ -1,17 +1,18 @@
-package org.example.guias;
+package org.example.guias.guidesWithSteps;
 
 import org.example.cost.DefaultCostCalculator;
 import org.example.geneticOperators.crossover.crossoverRecombination.CrossoverEdgeRecombination;
+import org.example.geneticOperators.crossover.crossoverRecombination.StepsEdgeRecombination;
+import org.example.geneticOperators.crossover.crossoverRecombination.StepsEdgeRecombinationComposer;
 import org.example.guias.tools.BuildExamples;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 import org.example.scenario.Scenario;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.List;
 
-public class GuideEdgeRecombinationCrossover {
-
+public class GuideEdgeRecombinationCrossoverWithSteps {
 
     private static Point startPoint = new Point(0, 0);
     private static Point endPoint = new Point(9,9);
@@ -24,6 +25,10 @@ public class GuideEdgeRecombinationCrossover {
 
         //edge recombination (recombinação de aresta) combina dois caminhos para formar um
         CrossoverEdgeRecombination crossoverEdgeRecombination = new CrossoverEdgeRecombination(movimentation);
+
+        //ativamos o registro do passo a passo
+        //cada vez que ativamos o registro, o anterior é apagado
+        crossoverEdgeRecombination.recordSteps(true);
 
         //gerando dois pais:
         Individual father = new Individual(movimentation, costCalculator);
@@ -62,23 +67,24 @@ public class GuideEdgeRecombinationCrossover {
         mother.add(new Point(8,8));
         mother.add(endPoint);
 
-        //esse crossover gera apenas um filho
         List<Individual> offspring = crossoverEdgeRecombination.crossover(father, mother);
 
-        System.out.printf("Custo do pai: %f\nPai:",father.getCost());
-        for(int a = 0; a < father.size(); ++a){
-            System.out.println(father.getPosition(a));
+        //o registro é apagado após ser coletado; ele não se acumula
+        StepsEdgeRecombination stepsEdgeRecombination = crossoverEdgeRecombination.getSteps();
+
+        //para um filho é registrado qual ponto foi escolhido, qual a razão e quais as possibilidades
+        //consulte como funciona esse crossover para mais detalhes
+
+        for(int a = 0; a < stepsEdgeRecombination.chosen().size(); ++a){
+
+            System.out.println("Escolhido: "+stepsEdgeRecombination.chosen().get(a)); //qual o ponto escolhido para integrar o filho
+            System.out.println("Razão: "+stepsEdgeRecombination.reasons().get(a)); //qual a razão da escolha (nó comum, unica opção...)
+            System.out.println("Adjacente de: "+stepsEdgeRecombination.adjacentTo().get(a)); //de quem ele é adjacente
         }
 
-        System.out.printf("Custo do mãe: %f\nMãe:",mother.getCost());
-        for(int a = 0; a < mother.size(); ++a){
-            System.out.println(mother.getPosition(a));
-        }
+        //o record é apagado após ler obtido:
+        StepsEdgeRecombination edgeRecombinationComposer = crossoverEdgeRecombination.getSteps();
 
-        System.out.printf("Custo do filho: %f\nFilho:",offspring.get(0).getCost());
-        for(int a = 0; a < offspring.get(0).size(); ++a){
-            System.out.println(offspring.get(0).getPosition(a));
-        }
+        System.out.println(edgeRecombinationComposer.chosen().size());
     }
 }
-

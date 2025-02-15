@@ -1,7 +1,7 @@
 package org.example.guias.tools;
 
 import org.example.cost.DefaultCostCalculator;
-import org.example.geneticOperators.crossover.crossoverRecombinacao.CrossoverEdgeRecombination;
+import org.example.geneticOperators.crossover.crossoverRecombination.CrossoverEdgeRecombination;
 import org.example.geneticOperators.mutation.singlePointMutation.SinglePointMutation;
 import org.example.geneticOperators.selection.TournamentWithReplacement;
 import org.example.movimentation.DefaultMovimentation;

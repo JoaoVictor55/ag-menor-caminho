@@ -1,6 +1,6 @@
 package org.example.simulation.geneticOperatorFactory;
 
-import org.example.geneticOperators.crossover.crossoverRecombinacao.CrossoverEdgeRecombination;
+import org.example.geneticOperators.crossover.crossoverRecombination.CrossoverEdgeRecombination;
 import org.example.movimentation.Movimentation;
 import org.example.simulation.ObjectConfigurator;
 import org.example.simulation.ObjectInstantiator;
@@ -50,7 +50,7 @@ public class CrossoverEdgeRecombinationInstantiator implements ObjectInstantiato
                 null);
 
         if(activeReport != null){
-            this.crossoverEdgeRecombination.setActiveReport(activeReport);
+            this.crossoverEdgeRecombination.recordSteps(activeReport);
         }
 
         return this.crossoverEdgeRecombination;

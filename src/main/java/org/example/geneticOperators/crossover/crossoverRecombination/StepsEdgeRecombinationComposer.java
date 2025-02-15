@@ -1,10 +1,10 @@
-package org.example.geneticOperators.crossover.crossoverRecombinacao;
+package org.example.geneticOperators.crossover.crossoverRecombination;
 
 import java.io.Serializable;
 import java.util.*;
 import java.awt.Point;
 
-public class ReportEdgeRecombinationComposer implements Serializable {
+public class StepsEdgeRecombinationComposer implements Serializable {
 
     private final ArrayList<String> reasons = new ArrayList<>();
     private final ArrayList<Point> chosen = new ArrayList<>();
@@ -12,7 +12,7 @@ public class ReportEdgeRecombinationComposer implements Serializable {
     private final ArrayList<List<Point>> adjacent = new ArrayList<>();
 
 
-    public void addReport(String reason, Point chosen, Point adjacentTo, List<Point> adjacent){
+    public void addRecordSteps(String reason, Point chosen, Point adjacentTo, List<Point> adjacent){
 
         reasons.add(reason);
         this.chosen.add(chosen);
@@ -29,10 +29,10 @@ public class ReportEdgeRecombinationComposer implements Serializable {
         adjacent.clear();
     }
 
-    public ReportEdgeRecombination getRecord(){
+    public StepsEdgeRecombination getSteps(){
 
 
-       return new ReportEdgeRecombination(reasons, chosen, adjacentsTo, adjacent);
+       return new StepsEdgeRecombination(reasons, chosen, adjacentsTo, adjacent);
     }
 
     public int getSize(){
@@ -41,7 +41,7 @@ public class ReportEdgeRecombinationComposer implements Serializable {
     }
 
 
-    public Map<String, Object> getReport(int i){
+    public Map<String, Object> getStep(int i){
 
         Map<String, Object> report = new HashMap<>();
 

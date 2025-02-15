@@ -2,7 +2,7 @@ package org.example.geneticOperators.mutation.singlePointMutation;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.geneticOperators.mutation.MutationWithReport;
+import org.example.geneticOperators.mutation.MutationWithSteps;
 import org.example.individual.Individual;
 import org.example.movimentation.Movimentation;
 
@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.Set;
 
 
-public class SinglePointMutation implements MutationWithReport<ReportMutation> {
+public class SinglePointMutation implements MutationWithSteps<StepsMutation> {
 
     private final Random random = new SecureRandom();
     private final Movimentation movimentation;
@@ -25,7 +25,7 @@ public class SinglePointMutation implements MutationWithReport<ReportMutation> {
     @Setter
     private int maxIterations;
 
-    private ReportMutation reportMutation = null;
+    private StepsMutation stepsMutation = null;
     private Boolean useReports = false;
 
     @Getter
@@ -135,17 +135,17 @@ public class SinglePointMutation implements MutationWithReport<ReportMutation> {
             if (substituted != null){
 
                 if(substitute != null){
-                    this.reportMutation = new ReportMutation(where, substituted, substitute,
+                    this.stepsMutation = new StepsMutation(where, substituted, substitute,
                             Type.REPLACED);
                 }
                 else{
 
-                    this.reportMutation = new ReportMutation(where, substituted, null,
+                    this.stepsMutation = new StepsMutation(where, substituted, null,
                             Type.REMOVED);
                 }
             }
             else{
-                this.reportMutation = new ReportMutation(where, null, null,
+                this.stepsMutation = new StepsMutation(where, null, null,
                         Type.NO_MUTATION);
             }
 
@@ -154,21 +154,21 @@ public class SinglePointMutation implements MutationWithReport<ReportMutation> {
     }
 
     @Override
-    public boolean isReportActive(){
+    public boolean isStepsRecordActive(){
 
         return this.useReports;
     }
 
     @Override
-    public void setActiveReport(boolean activate) {
+    public void recordSteps(boolean activate) {
 
         this.useReports = activate;
     }
 
     @Override
-    public ReportMutation getReport() {
+    public StepsMutation getSteps() {
 
-        return reportMutation;
+        return stepsMutation;
     }
 
 

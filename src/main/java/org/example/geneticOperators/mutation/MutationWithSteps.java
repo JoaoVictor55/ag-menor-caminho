@@ -1,8 +1,8 @@
 package org.example.geneticOperators.mutation;
 
-import org.example.geneticOperators.OperatorWithReport;
+import org.example.geneticOperators.OperatorWithSteps;
 
-public interface MutationWithReport<R> extends OperatorWithReport<R>, Mutation {
+public interface MutationWithSteps<R> extends OperatorWithSteps<R>, Mutation {
 
     enum Type {
 
