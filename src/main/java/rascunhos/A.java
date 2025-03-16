@@ -1,4 +1,4 @@
-package org.geneticAlgorithm;
+package rascunhos;
 
 public class A {
 

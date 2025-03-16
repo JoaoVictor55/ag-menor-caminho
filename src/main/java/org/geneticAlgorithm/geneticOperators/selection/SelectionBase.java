@@ -13,4 +13,5 @@ public abstract class SelectionBase implements Selection{
         return (offspringAverage -  parentsAverage)/parentsSd;
 
     }
+
 }

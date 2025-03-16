@@ -30,16 +30,12 @@ public class GeneticAlgorithm implements StochasticOperator {
 
     private List<OffspringGenerationSteps> offspringGenerationSteps;
 
-    public GeneticAlgorithm(Selection selection, Mutation mutation, Crossover crossover, Long seed){
+    public GeneticAlgorithm(Selection selection, Mutation mutation, Crossover crossover){
         this.selection = selection;
         this.mutation = mutation;
         this.random = new SecureRandom();
         this.crossover = crossover;
-        if(seed != null){
-            this.setSeed(seed);
-            this.seed = seed;
 
-        }
     }
 
 
@@ -60,11 +56,14 @@ public class GeneticAlgorithm implements StochasticOperator {
 
         while(newPopulation.size() < sizeGeneratedPopulation){
 
-            Individual father = parents.get(this.random.nextInt(0, parents.size()));
-            Individual mother = parents.get(this.random.nextInt(0, parents.size()));
-           List<Individual> offspring = crossover.crossover(father, mother);
+            //Individual father = parents.get(this.random.nextInt(0, parents.size()));
+            //Individual mother = parents.get(this.random.nextInt(0, parents.size()));
 
-            makeOffspringGenerationReport(father, mother, offspring);
+            Individual [] parentsSelected = selection.selectParents(parents);
+
+           List<Individual> offspring = crossover.crossover(parentsSelected[0], parentsSelected[1]);
+
+            makeOffspringGenerationReport(parentsSelected[0], parentsSelected[1], offspring);
 
             for(Individual i : offspring){
 
@@ -96,14 +95,6 @@ public class GeneticAlgorithm implements StochasticOperator {
         }
     }
 
-    public List<OffspringGenerationSteps> getOffspringGenerationSteps(){
-
-        if(!isMakeOffspringReport()) return null;
-
-        List<OffspringGenerationSteps> offspringGenerationReportsCopy = this.offspringGenerationSteps;
-        this.offspringGenerationSteps = new ArrayList<>();
-        return offspringGenerationReportsCopy;
-    }
 
     @Override
     public Long getSeed() {

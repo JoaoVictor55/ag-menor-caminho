@@ -21,9 +21,7 @@ public class DefaultCostCalculator implements CostCalculator {
     }
 
     @Override
-    public Double calculateCost(Individual individual) {
-
-        List<Point> path = individual.getPath();
+    public Double calculateCost(List<Point> path) {
 
         if(path.isEmpty()) return 0.0;
 
@@ -43,9 +41,9 @@ public class DefaultCostCalculator implements CostCalculator {
     }
 
     @Override
-    public int compare(Individual i1, Individual i2) {
+    public int compare(List<Point> path1, List<Point> path2) {
 
-        return Double.compare(this.calculateCost(i1), this.calculateCost(i2 ));
+        return Double.compare(this.calculateCost(path1), this.calculateCost(path2));
     }
 
 }

@@ -19,8 +19,13 @@ public class Scenario implements StochasticOperator {
 
     private final Random random;
 
+    @Getter
+    private float maxCost = Float.NEGATIVE_INFINITY;
+    @Getter
+    private float minCost = Float.POSITIVE_INFINITY;
 
-    private final float [][] cenario;
+    private final float [][] scenario;
+
 
     public Scenario(int maxHeight, int maxLength){
 
@@ -36,13 +41,13 @@ public class Scenario implements StochasticOperator {
         if(seed != null)
             this.random.setSeed(seed);
 
-        this.cenario = new float[this.maxHeight][this.maxLength];
+        this.scenario = new float[this.maxHeight][this.maxLength];
 
     }
 
     public void putBlocking(Point position){
 
-        this.cenario[position.x][position.y] = Float.POSITIVE_INFINITY;
+        this.scenario[position.x][position.y] = Float.POSITIVE_INFINITY;
     }
 
     public void putBlocking(Collection<Point> positions){
@@ -65,7 +70,7 @@ public class Scenario implements StochasticOperator {
                 if(!dontPutHere.contains(new Point(a, b)) && random.nextFloat(1.0f) < probability){
 
                     --numberInLine;
-                    this.cenario[a][b] = Float.POSITIVE_INFINITY;
+                    this.scenario[a][b] = Float.POSITIVE_INFINITY;
                 }
             }
         }
@@ -84,7 +89,7 @@ public class Scenario implements StochasticOperator {
                 if(random.nextFloat(1.0f) < probability){
 
                     --numberInLine;
-                    this.cenario[a][b] = Float.POSITIVE_INFINITY;
+                    this.scenario[a][b] = Float.POSITIVE_INFINITY;
                 }
             }
         }
@@ -95,7 +100,20 @@ public class Scenario implements StochasticOperator {
         for(int a = 0; a < this.maxHeight; ++a){
             for(int b = 0; b < this.maxLength; ++b){
 
-                this.cenario[a][b] = this.random.nextFloat(minCost, maxCost);
+                float cost = this.random.nextFloat(minCost, maxCost);
+
+                if(this.scenario[a][b] != Float.POSITIVE_INFINITY){
+                    this.scenario[a][b] = cost;
+
+                    if(this.maxCost < cost){
+                        this.maxCost = cost;
+                    }
+                    if(this.minCost > cost){
+                        this.minCost = cost;
+                    }
+                }
+
+
 
             }
         }
@@ -114,7 +132,12 @@ public class Scenario implements StochasticOperator {
 
     public boolean isUnblocked(Point position){
 
-        return !isOutsideBoundaries(position) && (cenario[position.x][position.y] != Double.POSITIVE_INFINITY);
+        return !isOutsideBoundaries(position) && (scenario[position.x][position.y] != Double.POSITIVE_INFINITY);
+    }
+
+    public boolean isUnblocked(int x, int y){
+
+        return !isOutsideBoundaries(x, y) && (scenario[x][y] != Double.POSITIVE_INFINITY);
     }
 
     public float getCost(Point position){
@@ -123,7 +146,7 @@ public class Scenario implements StochasticOperator {
             return Float.POSITIVE_INFINITY;
         }
 
-        return this.cenario[position.x][position.y];
+        return this.scenario[position.x][position.y];
     }
 
     public float getCost(int x, int y){
@@ -132,7 +155,7 @@ public class Scenario implements StochasticOperator {
             return Float.POSITIVE_INFINITY;
         }
 
-        return this.cenario[x][y];
+        return this.scenario[x][y];
     }
 
     @Override

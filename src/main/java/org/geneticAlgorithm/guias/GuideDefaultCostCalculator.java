@@ -39,7 +39,7 @@ public class GuideDefaultCostCalculator {
         individual.add(endPoint);
 
         //calculando o custo de um indivíduo:
-        System.out.println(defaultCostCalculator.calculateCost(individual));
+        System.out.println(defaultCostCalculator.calculateCost(individual.getPath()));
 
     }
 }

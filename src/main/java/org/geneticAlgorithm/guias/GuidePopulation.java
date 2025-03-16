@@ -6,7 +6,7 @@ import org.geneticAlgorithm.individual.Individual;
 import org.geneticAlgorithm.individual.Population;
 import org.geneticAlgorithm.movimentation.DefaultMovimentation;
 import org.geneticAlgorithm.scenario.Scenario;
-import org.geneticAlgorithm.uteis.GerarAleatorios;
+import org.geneticAlgorithm.tools.GerarAleatorios;
 
 import java.util.Iterator;
 import java.util.List;

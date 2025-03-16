@@ -4,6 +4,8 @@
     <content url="file://$MODULE_DIR$" dumb="true">
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/org/geneticAlgorithm/apresentacao" />
       <excludeFolder url="file://$MODULE_DIR$/src/main/java/org/geneticAlgorithm/guias" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/org/geneticAlgorithm/simulation" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/rascunhos" />
     </content>
   </component>
 </module>

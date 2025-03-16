@@ -1,4 +1,4 @@
-package org.geneticAlgorithm.uteis;
+package org.geneticAlgorithm.tools;
 
 import lombok.Getter;
 import org.geneticAlgorithm.cost.CostCalculator;

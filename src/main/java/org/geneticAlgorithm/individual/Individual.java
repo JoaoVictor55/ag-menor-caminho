@@ -90,7 +90,7 @@ public class Individual implements Comparable<Individual> {
 
     private void setCost(){
 
-        this.cost = costCalculator.calculateCost(this);
+        this.cost = costCalculator.calculateCost(this.path);
         this.reCalculateCost = false;
     }
 
@@ -122,7 +122,7 @@ public class Individual implements Comparable<Individual> {
     @Override
     public int compareTo(Individual o) {
 
-        return costCalculator.compare(this, o);
+        return costCalculator.compare(this.path, o.getPath());
     }
 
     /*
